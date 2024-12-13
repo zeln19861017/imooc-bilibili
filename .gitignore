@@ -1,0 +1,8 @@
+/.idea
+logs/*.log
+runtime/
+.history/
+config/database/test copy.php
+config/define/common/test copy.php 
+web/pull_member.log
+.vscode/sftp.json

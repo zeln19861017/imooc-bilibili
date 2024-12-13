@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.bilibili.dao.UserDao">
+
+
+    <select id="query" parameterType="java.lang.Long" resultType="java.util.Map">
+        select *
+        from t_user
+        where id = #{id}
+    </select>
+
+    <!-- resultType 为user实体-->
+    <select id="getUserByPhone" parameterType="java.lang.String" resultType="com.imooc.bilibili.domain.User">
+        select * from  t_user where phone = #{phone}
+    </select>
+
+
+    <!-- resultType 为user实体-->
+    <select id="getUserByPhoneOrEmail" parameterType="java.lang.String" resultType="com.imooc.bilibili.domain.User">
+        select * from  t_user where phone = #{param} or email = #{param}
+    </select>
+
+    <!-- PhoneOrEmail 查询-->
+<!--    mail 防止为空判断-->
+    <select id="getUserByPhoneOrEmailRaw" parameterType="java.lang.String" resultType="com.imooc.bilibili.domain.User">
+       select * from t_user u
+    where concat(u.phone, ifnull(u.email, '')) like CONCAT('%', #{phoneOrEmail}, '%')
+    </select>
+    <select id="getUserById" parameterType="java.lang.Long" resultType="com.imooc.bilibili.domain.User">
+        select * from  t_user where id = #{id}
+    </select>
+
+    <select id="getUserInfoByUserId" parameterType="java.lang.Long" resultType="com.imooc.bilibili.domain.UserInfo">
+        select * from  t_user_info where userId = #{id}
+    </select>
+
+    <insert id="addUser" parameterType="com.imooc.bilibili.domain.User" useGeneratedKeys="true" keyProperty="id" >
+        INSERT INTO t_user (phone, email, password, salt, createTime)
+        VALUES (#{phone}, #{email}, #{password}, #{salt}, #{createTime})
+    </insert>
+    <insert id="addUserInfo" parameterType="com.imooc.bilibili.domain.UserInfo">
+        INSERT INTO t_user_info (userId, nick, avatar, sign, gender, birth, createTime)
+        VALUES (#{userId}, #{nick}, #{avatar}, #{sign}, #{gender}, #{birth}, #{createTime})
+    </insert>
+
+</mapper>
+        <!--<mapper namespace="@#@@">-->
+        <!--    通用查询单个对象 &ndash;&gt;-->
+        <!--    <select id="selectByPrimaryKey" resultType="com.example.domain.BaseEntity">-->
+        <!--        SELECT * FROM ${tableName} WHERE id = #{id}-->
+        <!--    </select>-->
+
+        <!--     通用插入 &ndash;&gt;-->
+        <!--    <insert id="insert" parameterType="com.example.domain.BaseEntity">-->
+        <!--        INSERT INTO ${tableName} (id, other_field) VALUES (#{id}, #{otherField})-->
+        <!--    </insert>-->
+
+        <!--    通用删除 &ndash;&gt;-->
+        <!--    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">-->
+        <!--        DELETE FROM ${tableName} WHERE id = #{id}-->
+        <!--    </delete>-->
+
+        <!--     通用更新 &ndash;&gt;-->
+        <!--    <update id="updateByPrimaryKey" parameterType="com.example.domain.BaseEntity">-->
+        <!--        UPDATE ${tableName} SET other_field = #{otherField} WHERE id = #{id}-->
+        <!--    </update>-->
+
+        <!--</mapper>-->

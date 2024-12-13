@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+
+    <!-- 配置 MyBatis 使用的日志实现 -->
+    <settings>
+        <setting name="logImpl" value="LOG4J2" />
+    </settings>
+
+</configuration>
