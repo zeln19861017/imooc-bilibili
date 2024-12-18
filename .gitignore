@@ -1,4 +1,4 @@
-/.idea
+
 logs/*.log
 runtime/
 .history/
@@ -6,3 +6,44 @@ config/database/test copy.php
 config/define/common/test copy.php 
 web/pull_member.log
 .vscode/sftp.json
+# 忽略 IntelliJ IDEA 和 Eclipse 的项目文件
+.idea/
+*.iml
+*.ipr
+*.iws
+*.swp
+
+# 忽略操作系统产生的文件
+.DS_Store
+Thumbs.db
+
+# 忽略编译输出文件夹
+/target/
+/build/
+
+# 忽略日志文件
+*.log
+
+# 忽略 Maven 和 Gradle 的依赖文件
+/.m2/
+.gradle/
+
+# 忽略临时和缓存文件
+*.class
+*.jar
+*.war
+*.ear
+*.apk
+
+# 忽略 Spring Boot 可执行文件
+*.jar
+
+# 忽略配置文件中的敏感信息（例如数据库密码等）
+application.properties
+application.yml
+
+# 忽略 IntelliJ IDEA 的日志和缓存文件
+.idea/
+
+# 忽略 Gradle wrapper 配置
+.gradle/

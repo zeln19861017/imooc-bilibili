@@ -27,6 +27,10 @@
        select * from t_user u
     where concat(u.phone, ifnull(u.email, '')) like CONCAT('%', #{phoneOrEmail}, '%')
     </select>
+    <select id="getUserByPhoneOrEmailRawMany" parameterType="java.lang.String" resultType="com.imooc.bilibili.domain.User">
+        select * from t_user u
+        where concat(u.phone, ifnull(u.email, '')) like CONCAT('%', #{phoneOrEmail}, '%')
+    </select>
     <select id="getUserById" parameterType="java.lang.Long" resultType="com.imooc.bilibili.domain.User">
         select * from  t_user where id = #{id}
     </select>
@@ -43,6 +47,45 @@
         INSERT INTO t_user_info (userId, nick, avatar, sign, gender, birth, createTime)
         VALUES (#{userId}, #{nick}, #{avatar}, #{sign}, #{gender}, #{birth}, #{createTime})
     </insert>
+
+
+    <update id="updateUsers" parameterType="com.imooc.bilibili.domain.User">
+        UPDATE t_user
+        SET
+            <if test="phone !='' and phone != null">
+                phone = #{phone},
+            </if>
+            <if test="email !='' and email != null">
+                email = #{email},
+            </if>
+            <if test="password !='' and password != null">
+                password = #{password},
+            </if>
+            updateTime = #{updateTime}
+        where id = #{id}
+    </update>
+
+    <update id="updateUserInfos" parameterType="com.imooc.bilibili.domain.UserInfo">
+        UPDATE t_user_info
+        SET
+            <if test="nick !='' and nick != null">
+                nick = #{nick},
+            </if>
+            <if test="avatar != null">
+                avatar = #{avatar},
+            </if>
+            <if test="sign != null">
+                sign = #{sign},
+            </if>
+            <if test="birth !='' and birth != null">
+                birth = #{birth},
+            </if>
+            <if test="gender !='' and gender != null">
+                gender = #{gender},
+            </if>
+            updateTime = #{updateTime}
+        where userId = #{userId}
+    </update>
 
 </mapper>
         <!--<mapper namespace="@#@@">-->

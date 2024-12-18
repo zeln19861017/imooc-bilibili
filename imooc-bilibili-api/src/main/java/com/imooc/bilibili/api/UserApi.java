@@ -3,6 +3,7 @@ package com.imooc.bilibili.api;
 import com.imooc.bilibili.api.support.UserSupport;
 import com.imooc.bilibili.domain.JsonResponse;
 import com.imooc.bilibili.domain.User;
+import com.imooc.bilibili.domain.UserInfo;
 import com.imooc.bilibili.service.UserService;
 import com.imooc.bilibili.service.util.RSAUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,11 @@ public class UserApi {
 
     // 使用token获取用户信息
     @GetMapping("/users")
-    public JsonResponse<User> getUserInfo(){
+    public JsonResponse<User> getUserInfo() {
         Long userId = userSupport.getCurrentUserId();
         User user = userService.getUserInfo(userId);
-        return  new JsonResponse<>(user);
+        return new JsonResponse<>(user);
     }
-
 
     // 获取公钥
     @GetMapping("/rsa-pks")
@@ -39,7 +39,7 @@ public class UserApi {
     // 新建用户
     // 参数：接收前端封装的json类型的User实体类
     @PostMapping("/users")
-    public JsonResponse<String> addUser(@RequestBody User user){
+    public JsonResponse<String> addUser(@RequestBody User user) {
         userService.addUser(user);
         return JsonResponse.success();
     }
@@ -52,5 +52,21 @@ public class UserApi {
         return new JsonResponse<>(token);
     }
 
+    // 更新用户基础信息
+    @PutMapping("/users")
+    public JsonResponse<String> updateUsers(@RequestBody User user) throws Exception {
+        Long userId = userSupport.getCurrentUserId();
+        user.setId(userId);
+        userService.updateUsers(user);
+        return  JsonResponse.success();
+    }
+    // 更新用户信息
+    @PutMapping("/user-infos")
+    public JsonResponse<String> updateUserInfos(@RequestBody UserInfo userinfo) throws Exception {
+        Long userId = userSupport.getCurrentUserId();
+        userinfo.setUserId(userId);
+        userService.updateUserInfos(userinfo);
+        return  JsonResponse.success();
+    }
 
 }
