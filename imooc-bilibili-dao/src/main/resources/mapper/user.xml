@@ -4,11 +4,11 @@
 <mapper namespace="com.imooc.bilibili.dao.UserDao">
 
 
-    <select id="query" parameterType="java.lang.Long" resultType="java.util.Map">
-        select *
-        from t_user
-        where id = #{id}
-    </select>
+<!--    <select id="query" parameterType="java.lang.Long" resultType="java.util.Map">-->
+<!--        select *-->
+<!--        from t_user-->
+<!--        where id = #{id}-->
+<!--    </select>-->
 
     <!-- resultType 为user实体-->
     <select id="getUserByPhone" parameterType="java.lang.String" resultType="com.imooc.bilibili.domain.User">
@@ -37,6 +37,19 @@
 
     <select id="getUserInfoByUserId" parameterType="java.lang.Long" resultType="com.imooc.bilibili.domain.UserInfo">
         select * from  t_user_info where userId = #{id}
+    </select>
+
+<!--    // 多ids获取用户信息-->
+    <select id="getUserInfoByUserIds" resultType="com.imooc.bilibili.domain.UserInfo">
+        select * from  t_user_info
+                 where
+                    1=1 
+                    <if test="userIdList != nu and userIdList.size > 0">
+                        and userId in
+                        <foreach collection="userIdList" item="userId" index="index" open="(" close=")" separator="," >
+                            #{userId}
+                        </foreach>
+                    </if>
     </select>
 
     <insert id="addUser" parameterType="com.imooc.bilibili.domain.User" useGeneratedKeys="true" keyProperty="id" >

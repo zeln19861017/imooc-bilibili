@@ -39,6 +39,19 @@
         select * from  t_user_info where userId = #{id}
     </select>
 
+<!--    // 多ids获取用户信息-->
+    <select id="getUserInfoByUserIds" resultType="com.imooc.bilibili.domain.UserInfo">
+        select * from  t_user_info
+                 where
+                    1=1 
+                    <if test="userIdList != nu and userIdList.size > 0">
+                        and userId in
+                        <foreach collection="userIdList" item="userId" index="index" open="(" close=")" separator="," >
+                            #{userId}
+                        </foreach>
+                    </if>
+    </select>
+
     <insert id="addUser" parameterType="com.imooc.bilibili.domain.User" useGeneratedKeys="true" keyProperty="id" >
         INSERT INTO t_user (phone, email, password, salt, createTime)
         VALUES (#{phone}, #{email}, #{password}, #{salt}, #{createTime})

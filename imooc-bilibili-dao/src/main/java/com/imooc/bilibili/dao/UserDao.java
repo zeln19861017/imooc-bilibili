@@ -5,6 +5,7 @@ import com.imooc.bilibili.domain.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Set;
 
 @Mapper
 // 关联mybatis
@@ -20,4 +21,6 @@ public interface UserDao {
 
     void updateUsers(User user);
     void updateUserInfos(UserInfo userInfo);
+
+    List<UserInfo> getUserInfoByUserIds(Set<Long> userIdList);
 }
