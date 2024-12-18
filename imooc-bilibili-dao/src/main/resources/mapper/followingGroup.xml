@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.bilibili.dao.FollowingGroupDao">
+
+
+    <!-- resultType 为user实体-->
+    <select id="getByType" parameterType="java.lang.String" resultType="com.imooc.bilibili.domain.FollowingGroup">
+        select * from  t_following_group where `type` = #{type}
+    </select>
+
+
+    <!-- resultType 为user实体-->
+    <select id="getById" parameterType="java.lang.String" resultType="com.imooc.bilibili.domain.FollowingGroup">
+        select * from  t_following_group where id = #{id}
+    </select>
+
+
+
+</mapper>
+        <!--<mapper namespace="@#@@">-->
+        <!--    通用查询单个对象 &ndash;&gt;-->
+        <!--    <select id="selectByPrimaryKey" resultType="com.example.domain.BaseEntity">-->
+        <!--        SELECT * FROM ${tableName} WHERE id = #{id}-->
+        <!--    </select>-->
+
+        <!--     通用插入 &ndash;&gt;-->
+        <!--    <insert id="insert" parameterType="com.example.domain.BaseEntity">-->
+        <!--        INSERT INTO ${tableName} (id, other_field) VALUES (#{id}, #{otherField})-->
+        <!--    </insert>-->
+
+        <!--    通用删除 &ndash;&gt;-->
+        <!--    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">-->
+        <!--        DELETE FROM ${tableName} WHERE id = #{id}-->
+        <!--    </delete>-->
+
+        <!--     通用更新 &ndash;&gt;-->
+        <!--    <update id="updateByPrimaryKey" parameterType="com.example.domain.BaseEntity">-->
+        <!--        UPDATE ${tableName} SET other_field = #{otherField} WHERE id = #{id}-->
+        <!--    </update>-->
+
+        <!--</mapper>-->

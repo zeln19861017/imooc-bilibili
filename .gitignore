@@ -1,5 +1,5 @@
 
-logs/*.log
+/logs/*.log
 runtime/
 .history/
 config/database/test copy.php
@@ -47,3 +47,6 @@ application.yml
 
 # 忽略 Gradle wrapper 配置
 .gradle/
+/imooc-bilibili-api/target/
+/imooc-bilibili-dao/target/
+/imooc-bilibili-service/target/
