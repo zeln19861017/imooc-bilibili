@@ -19,6 +19,10 @@
     <select id="getUserFollowings" parameterType="java.lang.Long" resultType="com.imooc.bilibili.domain.UserFollowing">
         select * from  t_user_following where userId = #{userId}
     </select>
+<!--查询粉丝-->
+    <select id="getUserFans" resultType="com.imooc.bilibili.domain.UserFollowing">
+        select * from  t_user_following where followingId = #{userId}
+    </select>
 
 
 </mapper>
